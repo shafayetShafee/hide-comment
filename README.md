@@ -62,7 +62,7 @@ And the rendered version,
 
 ## Example
 
-Here is the source code for  example: [example.qmd](example.qmd) and [the rendered output](https://shafayetshafee.github.io/hide-comment/example.html)
+Here is the source code for  example: [example.qmd](example.qmd) and [the rendered output](https://shafayetshafee.github.io/hide-comment/example.html) (The rendered output is in `html` format, but this extension also works for `pdf` and `revealjs` format.)
 
 
 ## Acknowledgement
