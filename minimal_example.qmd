@@ -1,0 +1,23 @@
+---
+title: "hide-comment example"
+comment-directive: "#>"
+filters: 
+  - hide-comment
+code-line-numbers: true
+format: pdf
+---
+
+```{r}
+#| message: false
+#| echo: true
+#> This is some hidden comment which is visible in code editor
+#> but not in rendered documents
+library(dplyr) 
+
+#>
+#> more hidden comment
+mtcars %>% 
+  select(mpg, am ,vs) %>% 
+  group_by(vs) %>% 
+  summarise(mean(mpg))
+```

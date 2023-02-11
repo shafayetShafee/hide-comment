@@ -1,0 +1,132 @@
+---
+title: "Hide Comments from the Code Chunk in Rendered Document"
+author: Shafayet Khan Shafee
+date: last-modified
+format: html
+code-tools: true
+comment-directive: 
+    - "#>"
+    - "#?"
+    - "//>"
+    - "%%>"
+filters: 
+  - hide-comment
+execute: 
+  echo: true
+  eval: false
+embed-resources: true
+---
+
+> View the source code of this document to compare with rendered version, by clicking `</> Code` on top-right corner.
+
+To write a comment that will be hidden from the code chunk in rendered document, you need to use comment-directives. And the syntax of the comment directive depends on the language of the code chunk and therefore, should start with the character(s) that is used to do inline commenting in that programming language.
+
+So for python, R and Julia, it should start with hash or pound symbol `#`. For javascript or ojs or dot chunk, it should start with `//`, for mermaid graph chunk it should start with `%%`. It is because, after all, they should be valid comment line when the document parses.
+
+After deciding on the syntax of comment-directives, enlist them with or under the `comment-directive` yaml option. Then `hide-comment` filter will remove the lines from code chunk that initiates with the enlisted directives.
+
+This demo uses
+
+- `#>` comment-directive for R and Julia code chunk.
+- `#?` comment-directive for python code chunk.
+- `//>` for ojs and dot code chunk
+- `%%>` for mermaid code chunk
+
+## R code chunk
+
+```{r}
+#| message: false
+#> This is some hidden comment which is visible in code editor
+#> but not in rendered documents
+library(dplyr) 
+
+#>
+#> more hidden comment
+mtcars %>% 
+  select(mpg, am ,vs) %>% 
+  group_by(vs) %>% 
+  summarise(mean(mpg))
+```
+
+
+## Python code chunk
+
+```{python}
+#? This is some hidden comment which is visible in code editor
+#? but not in rendered documents
+import matplotlib.pyplot as plt
+plt.plot([1,23,2,4])
+plt.show()
+```
+
+
+## Julia code chunk
+
+```{julia}
+#| eval: false
+#> This is some hidden comment which is visible in code editor
+#> but not in rendered documents
+using Plots
+
+plot(sin, x->sin(2x), 0, 2π, leg=false, fill=(0,:lavender))
+```
+
+## ojs code chunk
+
+```{ojs}
+//> This is some hidden comment which is visible in code editor
+//> but not in rendered documents
+viewof bill_length_min = Inputs.range(
+  [32, 50], 
+  {value: 35, step: 1, label: "Bill length (min):"}
+)
+viewof islands = Inputs.checkbox(
+  ["Torgersen", "Biscoe", "Dream"], 
+  { value: ["Torgersen", "Biscoe"], 
+    label: "Islands:"
+  }
+)
+```
+
+
+## dot code chunk
+
+```{dot}
+//> This is some hidden comment which is visible in code editor
+//> but not in rendered documents
+graph G {
+  layout=neato
+  run -- intr;
+  intr -- runbl;
+  runbl -- run;
+  run -- kernel;
+  kernel -- zombie;
+  kernel -- sleep;
+  kernel -- runmem;
+  sleep -- swap;
+  swap -- runswap;
+  runswap -- new;
+  runswap -- runmem;
+  new -- runmem;
+  sleep -- runmem;
+}
+```
+
+
+## Mermaid code chunk
+
+```{mermaid}
+%%> This is some hidden comment which is visible in code editor
+%%> but not in rendered documents
+sequenceDiagram
+  participant Alice
+  participant Bob
+  Alice->>John: Hello John, how are you?
+  loop Healthcheck
+    John->>John: Fight against hypochondria
+  end
+  Note right of John: Rational thoughts <br/>prevail!
+  John-->>Alice: Great!
+  John->>Bob: How about you?
+  Bob-->>John: Jolly good!
+```
