@@ -24,7 +24,7 @@ filters:
 
 Now to write a comment that will be hidden from the code chunk in rendered document, you need to use comment-directives. And the syntax of the comment directive depends on the language of the code chunk and therefore, should start with the character(s) that is used to do inline commenting in that programming language.
 
-So for python, R and Julia, it should start with hash or pound symbol `#`. For javascript or ojs or dot chunk, it should start with `//`, for mermaid graph chunk it should start with `%%`. It is because, after all, they should be valid comment line when the document parses.
+So for python, R and Julia, it should start with hash symbol `#`. For javascript or ojs or dot chunk, it should start with `//`, for mermaid graph chunk it should start with `%%`. It is because, after all, they should be valid comment line when the document parses.
 
 After deciding on the syntax of comment-directives, enlist them with or under the `comment-directive` yaml option. Then `hide-comment` filter will remove the lines from code chunk that initiates with the enlisted directives.
 
